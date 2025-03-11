@@ -1,0 +1,3 @@
+file(REMOVE_RECURSE
+  "libIO_MODULE.a"
+)

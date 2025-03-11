@@ -1,0 +1,3 @@
+file(REMOVE_RECURSE
+  "libSA_MESH_ROUTINES_1.a"
+)

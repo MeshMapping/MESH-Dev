@@ -1,0 +1,7 @@
+# The fortran modules provided by this target.
+provides
+ mpi.mod
+ mpi_flags.mod
+ mpi_module.mod
+ mpi_shared_variables.mod
+ mpi_utilities.mod

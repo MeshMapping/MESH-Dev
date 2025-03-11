@@ -1,0 +1,3 @@
+file(REMOVE_RECURSE
+  "libWATROUTE_OLD.a"
+)

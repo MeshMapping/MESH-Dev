@@ -1,0 +1,3 @@
+file(REMOVE_RECURSE
+  "libRESERVOIR_UPDATE.a"
+)

@@ -1,0 +1,3 @@
+file(REMOVE_RECURSE
+  "libRPN_WATROUTE_MESH.a"
+)

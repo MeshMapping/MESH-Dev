@@ -1,0 +1,2 @@
+C:/msys64/mingw64/bin/ar.exe qc libRPN_WATROUTE_CODE.a CMakeFiles/RPN_WATROUTE_CODE.dir/area_watflood.f.obj CMakeFiles/RPN_WATROUTE_CODE.dir/rerout.f.obj CMakeFiles/RPN_WATROUTE_CODE.dir/route.f.obj CMakeFiles/RPN_WATROUTE_CODE.dir/flowinit.f.obj
+C:/msys64/mingw64/bin/ranlib.exe libRPN_WATROUTE_CODE.a

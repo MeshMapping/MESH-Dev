@@ -1,0 +1,25 @@
+# The fortran modules provided by this target.
+provides
+ control_variables.mod
+ flags.mod
+ fm_variables.mod
+ input_parameters.mod
+ model_dates.mod
+ model_files_variables.mod
+ model_files_variabletypes.mod
+ model_variables.mod
+ output_variables.mod
+ parameter_names.mod
+ precision.mod
+ print_routines.mod
+ projection_variables.mod
+ resume_run.mod
+ runclass36_config.mod
+ runclass36_constants.mod
+ runclass36_module.mod
+ runclass36_save_output.mod
+ runclass36_variables.mod
+ sa_mesh_common.mod
+ shd_variables.mod
+ strings.mod
+ variable_names.mod
