@@ -86,7 +86,12 @@ add_dependencies(SA_MESH_ROUTINES_2
                     RPN_WATROUTE_MESH
                     IRRIGATION
                     BASEFLOW
-                    CLASS_LIBRARY)
+                    CLASS_LIBRARY
+                    MOUNTAIN
+                        
+                    SVS_LIBRARY
+                    LIBRMN
+                    RPN_WATROUTE_CODE)
 
 target_link_libraries(SA_MESH_ROUTINES_1 PUBLIC
                         MPI_MODULE    

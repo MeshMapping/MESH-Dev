@@ -19,17 +19,35 @@ option(ENABLE_DOUBLE "Enable double precision" OFF)
 option(ENABLE_MPI "Enable MPI support" OFF)
 option(USE_GFORTRAN "Use gfortran compiler" ON)
 
-# Compiler selection
-if(USE_GFORTRAN)
-    set(CMAKE_Fortran_COMPILER gfortran)
-    set(CMAKE_C_COMPILER gcc)
-    set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -cpp")   
 
-else()
-    set(CMAKE_Fortran_COMPILER ifort)
-    set(CMAKE_C_COMPILER icc)
-endif()
+# # Compiler selection
+# if(USE_GFORTRAN)
+#     set(CMAKE_Fortran_COMPILER gfortran)
+#     set(CMAKE_C_COMPILER gcc)
+#     set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -cpp")   
 
+# else()
+#     set(CMAKE_Fortran_COMPILER ifort)
+#     set(CMAKE_C_COMPILER icc)
+# endif()
+
+# Detect compiler type
+# if(CMAKE_Fortran_COMPILER_ID MATCHES "Intel")
+#     set(FC ifort)
+#     set(CC icc)
+#     set(GFLAG "-check bounds -fpe0")
+#     set(LFLAG "-c -g -traceback -fp-model source")
+#     set(FTN90PP "-fpp -free")
+#     set(FTN90PPOPT "-Tf")
+# else()
+    set(FC gfortran)
+    set(CC gcc)
+    set(GFLAG "-fbounds-check -ffpe-trap=invalid,zero,overflow -Wconversion -Wsurprising -Wintrinsic-shadow -Wtarget-lifetime")
+    set(LFLAG "-c -g -fbacktrace")
+    set(FTN90PP "-x f95 -cpp -ffree-form -ffree-line-length-none -fcray-pointer")
+    set(FTN90PPOPT "")
+    set(DFLAG "RUNSVS")
+# endif()
 
 
 # Directory definitions
@@ -100,6 +118,7 @@ target_include_directories(IO_MODULE PUBLIC ${CMAKE_BINARY_DIR}/Modules/io_modul
 target_include_directories(SIM_STAT PUBLIC ${CMAKE_BINARY_DIR}/Modules/simulation_statistics/)
 target_include_directories(STRING_MODULE PUBLIC ${CMAKE_BINARY_DIR}/Modules/strings/)
 target_include_directories(IRRIGATION PUBLIC ${CMAKE_BINARY_DIR}/Modules/irrigation_demand/)
+target_include_directories(MOUNTAIN PUBLIC ${CMAKE_BINARY_DIR}/Modules/mountain_module/)
 
 target_include_directories(BLOWING_SNOW PUBLIC ${CMAKE_BINARY_DIR}/Blowing_Snow)
 
@@ -114,6 +133,10 @@ target_include_directories(BASEFLOW PUBLIC ${CMAKE_BINARY_DIR}/Routing_Model/bas
 
 # Include directories to make sure headers or modules are visible
 target_include_directories(CLASS_LIBRARY PUBLIC ${CMAKE_BINARY_DIR}/LSS_Model/CLASS/3.6/)
+# Include directories to make sure headers or modules are visible
+target_include_directories(SVS_LIBRARY PUBLIC 
+${CMAKE_BINARY_DIR}/LSS_Model/SVS/svs1/
+${CMAKE_BINARY_DIR}/Driver/MESH_Driver/)
 
 target_compile_options(${samesh_exe} PRIVATE -O3)
 # NetCDF include directories

@@ -9,4 +9,7 @@ add_library(BLOWING_SNOW
 
 target_link_libraries(BLOWING_SNOW PUBLIC 
 STRING_MODULE)
-# target_sources(${samesh_exe} PRIVATE ${BLOWING_SNOW})
+
+target_sources(BLOWING_SNOW PUBLIC 
+            ${CMAKE_SOURCE_DIR}/LSS_Model/CLASS/3.6/sa_mesh_process/RUNCLASS36_constants.f90
+            )
