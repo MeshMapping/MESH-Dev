@@ -5,5 +5,6 @@ add_library(MOUNTAIN
 
 target_link_libraries(MOUNTAIN PUBLIC 
 STRING_MODULE
-SA_MESH_routines_1)   
-# target_sources(${samesh_exe} PRIVATE ${MOUNTAIN})
+SA_MESH_ROUTINES_1)   
+
+target_include_directories(MOUNTAIN PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY})

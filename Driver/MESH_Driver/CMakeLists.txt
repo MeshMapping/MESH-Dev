@@ -26,16 +26,16 @@ set(SA_MESH_routines_2
     read_initial_inputs.f90
 
     read_shed_r2c.f90 
-    read_shed_nc.f90 
+    read_shed_nc.F90 
     read_shed_csv.f90 
     read_soil_levels.f90 
-    read_shed_nc_subbasin.f90
+    read_shed_nc_subbasin.F90
 
     read_parameters.f90
     read_parameters_class.f90 
     read_parameters_hydrology.f90 
     read_parameters_r2c.f90 
-    read_parameters_nc.f90 
+    read_parameters_nc.F90 
     read_parameters_csv.f90
 
     check_parameters.f90
@@ -53,20 +53,20 @@ set(SA_MESH_routines_2
 	read_soil_ini.f90
 
 	read_initial_values_r2c.f90 
-    read_initial_values_nc.f90
+    read_initial_values_nc.F90
     
 	module_files.f90
 
     #Output routines
-    save_initial_values_nc.f90
-	output_files.f90
+    save_initial_values_nc.F90
+	output_files.F90
     save_basin_output.f90
 
     # MESH driver
-    read_run_options.f90 read_fews_runinfo_nc.f90
-	sa_mesh_run_within_tile.f90 sa_mesh_run_within_grid.f90 sa_mesh_run_between_grid.f90
+    read_run_options.f90 read_fews_runinfo_nc.F90
+	sa_mesh_run_within_tile.F90 sa_mesh_run_within_grid.F90 sa_mesh_run_between_grid.F90
     
-	resumerun_config.f90 resumerun_read.f90 resumerun_save.f90
+	resumerun_config.F90 resumerun_read.F90 resumerun_save.F90
 	MESH_driver.f90
 )
 
@@ -82,16 +82,16 @@ add_dependencies(SA_MESH_ROUTINES_2
                     SIM_STAT
                     WATROUTE_OLD
                     PERMAFROST
+                    BLOWING_SNOW
                     RESERVOIR_UPDATE
-                    RPN_WATROUTE_MESH
+                    RPN_WATROUTE
                     IRRIGATION
                     BASEFLOW
                     CLASS_LIBRARY
                     MOUNTAIN
                         
                     SVS_LIBRARY
-                    LIBRMN
-                    RPN_WATROUTE_CODE)
+                    LIBRMN)
 
 target_link_libraries(SA_MESH_ROUTINES_1 PUBLIC
                         MPI_MODULE    
@@ -101,11 +101,15 @@ target_link_libraries(SA_MESH_ROUTINES_2 PUBLIC
                         WATROUTE_OLD
                         PERMAFROST
                         RESERVOIR_UPDATE
-                        RPN_WATROUTE_MESH
+                        RPN_WATROUTE
                         IRRIGATION
                         BASEFLOW
-                        CLASS_LIBRARY)
+                        CLASS_LIBRARY
+                        SVS_LIBRARY
+                        MOUNTAIN
+                        )
 
+set_fortran_compile_flags(SA_MESH_ROUTINES_2)
 # target_include_directories(MPI_MODULE PUBLIC ${CMAKE_BINARY_DIR}/Modules/mpi_module/)
 # # target_include_directories(IO_MODULE PUBLIC ${CMAKE_BINARY_DIR}/Modules/io_modules/)
 # target_sources(${samesh_exe} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/control_variables.f90)

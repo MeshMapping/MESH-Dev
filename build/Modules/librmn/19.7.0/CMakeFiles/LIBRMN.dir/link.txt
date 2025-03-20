@@ -1,2 +1,0 @@
-C:/msys64/mingw64/bin/ar.exe qc libLIBRMN.a CMakeFiles/LIBRMN.dir/base/datec.f.obj CMakeFiles/LIBRMN.dir/base/moduledate.f90.obj CMakeFiles/LIBRMN.dir/base/set_user_lock.F90.obj CMakeFiles/LIBRMN.dir/primitives/up2low.f.obj CMakeFiles/LIBRMN.dir/primitives/getenvc.c.obj
-C:/msys64/mingw64/bin/ranlib.exe libLIBRMN.a

@@ -1,4 +1,4 @@
-target_sources(SVS_LIBRARY PRIVATE
+target_sources(SVS_LIBRARY PUBLIC
                 sfc_options.F90
                 svs_configs.F90
 
@@ -24,7 +24,6 @@ target_sources(SVS_LIBRARY PRIVATE
                 phtsyn_svs.F90 
                 update_svs.F90
                 
-                # For now, must manually specify one of following:
                 inisoili_svs.F90
                 
         )

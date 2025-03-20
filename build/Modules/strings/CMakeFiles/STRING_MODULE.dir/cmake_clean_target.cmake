@@ -1,3 +1,0 @@
-file(REMOVE_RECURSE
-  "libSTRING_MODULE.a"
-)

@@ -1,3 +1,0 @@
-file(REMOVE_RECURSE
-  "libSVS_LIBRARY.a"
-)

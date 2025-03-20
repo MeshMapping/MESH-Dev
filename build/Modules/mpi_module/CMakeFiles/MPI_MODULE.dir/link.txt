@@ -1,2 +1,0 @@
-C:/msys64/mingw64/bin/ar.exe qc libMPI_MODULE.a CMakeFiles/MPI_MODULE.dir/mpi_flags.f90.obj CMakeFiles/MPI_MODULE.dir/mpi_shared_variables.f90.obj CMakeFiles/MPI_MODULE.dir/mpi_utilities.f90.obj CMakeFiles/MPI_MODULE.dir/mpi_module.f90.obj CMakeFiles/MPI_MODULE.dir/mpi_stub.f90.obj
-C:/msys64/mingw64/bin/ranlib.exe libMPI_MODULE.a
