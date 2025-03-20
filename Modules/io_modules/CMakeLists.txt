@@ -20,13 +20,12 @@ add_library(IO_MODULE
 target_link_libraries(IO_MODULE PUBLIC
                         MPI_MODULE
                         STRING_MODULE
-                        SA_MESH_routines_1
-                         
+                        SA_MESH_ROUTINES_1
                         )
 
 target_sources(IO_MODULE PUBLIC 
-                ${CMAKE_SOURCE_DIR}/Modules/strings/stringmod.f90
-                ${CMAKE_SOURCE_DIR}/Modules/strings/precmod.f90
+#                 ${CMAKE_SOURCE_DIR}/Modules/strings/stringmod.f90
+#                 ${CMAKE_SOURCE_DIR}/Modules/strings/precmod.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/shd_variables.f90
                 
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/shd_variables.f90
@@ -47,7 +46,9 @@ target_sources(IO_MODULE PUBLIC
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/output_variables.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/sa_mesh_common.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/resume_run.f90
+                ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/read_basin_structures.f90
                 )
 
 add_dependencies(IO_MODULE MPI_MODULE)
-target_include_directories(MPI_MODULE PUBLIC ${CMAKE_BINARY_DIR}/Modules/mpi_module/)
+target_include_directories(IO_MODULE PUBLIC ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/)
+target_include_directories(IO_MODULE PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY})

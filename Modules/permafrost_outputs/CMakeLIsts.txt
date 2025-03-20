@@ -4,7 +4,8 @@ add_library(PERMAFROST
             permafrost_outputs_module.f90
         )
 
-# add_dependencies(PERMAFROST SA_MESH_routines_1)
 target_link_libraries(PERMAFROST PUBLIC
         SA_MESH_ROUTINES_1
 )
+
+target_include_directories(PERMAFROST PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY})

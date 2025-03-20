@@ -14,7 +14,7 @@
 #     PROPERTIES COMPILE_FLAGS "-fpp -free -Tf"
 # )
 
-target_sources(SVS_LIBRARY PRIVATE
+target_sources(SVS_LIBRARY PUBLIC
                 # ${CMAKE_CURRENT_SOURCE_DIR}/*.F90
                 runsvs_mod_sa_mesh.F90 
                 runsvs_utils.F90
@@ -25,6 +25,7 @@ target_sources(SVS_LIBRARY PRIVATE
 
 target_link_libraries(SVS_LIBRARY PUBLIC
 CLASS_LIBRARY)
+
 
 # foreach(src ${SRC_FT90})
 #     set_source_files_properties(${src} PROPERTIES COMPILE_FLAGS "${FTN90PP} ${LFLAG} ${INC_DIRS} ${DFLAG} ${FTN90PPOPT}")
