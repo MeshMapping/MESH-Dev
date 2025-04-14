@@ -80,6 +80,7 @@ add_dependencies(SA_MESH_ROUTINES_1 MPI_MODULE IO_MODULE)
 add_dependencies(SA_MESH_ROUTINES_2 
                     SA_MESH_ROUTINES_1 
                     SIM_STAT
+                    IO_MODULE
                     WATROUTE_OLD
                     PERMAFROST
                     BLOWING_SNOW
@@ -107,38 +108,7 @@ target_link_libraries(SA_MESH_ROUTINES_2 PUBLIC
                         CLASS_LIBRARY
                         SVS_LIBRARY
                         MOUNTAIN
+                        IO_MODULE
                         )
 
 set_fortran_compile_flags(SA_MESH_ROUTINES_2)
-# target_include_directories(MPI_MODULE PUBLIC ${CMAKE_BINARY_DIR}/Modules/mpi_module/)
-# # target_include_directories(IO_MODULE PUBLIC ${CMAKE_BINARY_DIR}/Modules/io_modules/)
-# target_sources(${samesh_exe} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/control_variables.f90)
-
-# target_include_directories(${samesh_exe} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
-# target_link_libraries(${samesh_exe} PUBLIC
-#                         MPI_OBJECTS 
-#                         SIM_STAT 
-#                         IRRIGATION
-#                         IO_MODULE
-#                         MOUNTAIN
-#                         PERMAFROST
-#                         STRING_MODULE
-#                         LIBRMN
-                        
-#                         BLOWING_SNOW
-
-#                         BASEFLOW
-#                         RESERVOIR_UPDATE
-#                         RPN_WATROUTE_MESH
-#                         RPN_WATROUTE_CODE
-#                         WATROUTE_OLD
-
-#                         SVS_LIBRARY
-#                         CLASS_LIBRARY
-#                         )
-
-
-
-# Optional: Add compiler flags
-# target_compile_options(${samesh_exe} PRIVATE -O3)

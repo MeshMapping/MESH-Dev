@@ -9,9 +9,9 @@ add_library(IO_MODULE
             date_utilities.f90
 			txt_io.f90 
             ensim_io.f90 
-            nc_io.f90
+            nc_io.F90
             variable_maps.f90 
-            mesh_io.f90
+            mesh_io.F90
             input_forcing.f90
 			basin_utilities.f90
             
@@ -51,4 +51,18 @@ target_sources(IO_MODULE PUBLIC
 
 add_dependencies(IO_MODULE MPI_MODULE)
 target_include_directories(IO_MODULE PUBLIC ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/)
-target_include_directories(IO_MODULE PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY})
+target_include_directories(IO_MODULE PUBLIC 
+    ${CMAKE_Fortran_MODULE_DIRECTORY})
+
+if(NETCDF)
+    find_package(NetCDF REQUIRED Fortran)
+    target_link_libraries(IO_MODULE PUBLIC 
+        netcdff
+        netcdf)
+    
+    execute_process(
+        COMMAND nf-config --includedir 
+        OUTPUT_VARIABLE NETCDFINC
+        OUTPUT_STRIP_TRAILING_WHITESPACE
+    )
+endif()
