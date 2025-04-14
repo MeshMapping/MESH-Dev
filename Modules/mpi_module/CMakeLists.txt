@@ -3,7 +3,12 @@ add_library(MPI_MODULE
             mpi_shared_variables.f90 
             mpi_utilities.f90
             mpi_module.f90
-            ## Dynamic to compiler options #CHANGE
-            mpi_stub.f90)
+            )
+
+if(NOT MPI_GCC AND NOT MPI_INTEL)
+    target_sources(MPI_MODULE PRIVATE
+        mpi_stub.f90
+    )
+endif()
 
 target_include_directories(MPI_MODULE PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY})
