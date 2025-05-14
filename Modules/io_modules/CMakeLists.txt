@@ -1,3 +1,8 @@
+# CMakeLists.txt – Builds the IO_MODULE library
+# Sets required libraries and dependencies
+# Includes compiling of source files from MESH Driver folder that are
+# required for this library 
+
 add_library(IO_MODULE
             mesh_io_constants.f90
             variable_types.f90 
@@ -14,55 +19,35 @@ add_library(IO_MODULE
             mesh_io.F90
             input_forcing.f90
 			basin_utilities.f90
-            
         )
 
-target_link_libraries(IO_MODULE PUBLIC
-                        MPI_MODULE
-                        STRING_MODULE
-                        SA_MESH_ROUTINES_1
-                        )
+target_link_libraries(IO_MODULE PRIVATE MPI_MODULE STRING_MODULE)
+add_dependencies(IO_MODULE MPI_MODULE STRING_MODULE)
 
 target_sources(IO_MODULE PUBLIC 
-#                 ${CMAKE_SOURCE_DIR}/Modules/strings/stringmod.f90
-#                 ${CMAKE_SOURCE_DIR}/Modules/strings/precmod.f90
-                ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/shd_variables.f90
-                
-                ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/shd_variables.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/print_routines.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/program_end.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/program_abort.f90
+                
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/module_files_variabletypes.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/module_files_variables.f90
+                
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/module_dates.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/FLAGS.f90
+
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/control_variables.f90
+
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/variable_names.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/parameter_names.f90
+
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/projection_variables.f90
+                ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/shd_variables.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/fm_variables.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/input_parameters.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/model_variables.f90
+
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/output_variables.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/sa_mesh_common.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/resume_run.f90
                 ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/read_basin_structures.f90
-                )
-
-add_dependencies(IO_MODULE MPI_MODULE)
-target_include_directories(IO_MODULE PUBLIC ${CMAKE_SOURCE_DIR}/Driver/MESH_Driver/)
-target_include_directories(IO_MODULE PUBLIC 
-    ${CMAKE_Fortran_MODULE_DIRECTORY})
-
-if(NETCDF)
-    find_package(NetCDF REQUIRED Fortran)
-    target_link_libraries(IO_MODULE PUBLIC 
-        netcdff
-        netcdf)
-    
-    execute_process(
-        COMMAND nf-config --includedir 
-        OUTPUT_VARIABLE NETCDFINC
-        OUTPUT_STRIP_TRAILING_WHITESPACE
-    )
-endif()
+            )

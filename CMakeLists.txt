@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.14)
 
-# Define output executable name (default)
 project(MESH_cmake VERSION 1.0 LANGUAGES Fortran C)
 
+# Folder to store .mod files
 set(CMAKE_Fortran_MODULE_DIRECTORY ${CMAKE_BINARY_DIR}/mod)
 
+# Folder to store compiled libraries (.a files)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
+# Folder to store the sa_mesh executable
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 
@@ -28,22 +30,24 @@ set(samesh_exe "sa_mesh")
 if(IFORT OR MPI_INTEL)
     set(CMAKE_Fortran_COMPILER ifort)
     set(CMAKE_C_COMPILER icc)
-elseif(MINGW_STATIC)
-    set(CMAKE_Fortran_COMPILER gfortran)
-    set(CMAKE_C_COMPILER gcc)
-    set(CMAKE_EXE_LINKER_FLAGS "-static")
-    set(samesh_exe "sa_mesh_static")
-elseif(MPI_GCC OR MPI_INTEL)
-    find_package(MPI REQUIRED)
-    set(CMAKE_Fortran_COMPILER mpif90)
-    set(CMAKE_C_COMPILER mpicc)
-    set(samesh_exe "mpi_sa_mesh")
 else()
     set(CMAKE_Fortran_COMPILER gfortran)
     set(CMAKE_C_COMPILER gcc)
     set(FTN90PP "-x f95 -cpp -ffree-form -ffree-line-length-none -fcray-pointer")
     set(FTN90PPOPT "")
     add_definitions(-ffree-line-length-none)
+endif()
+if(MINGW_STATIC)
+    set(CMAKE_Fortran_COMPILER gfortran)
+    set(CMAKE_C_COMPILER gcc)
+    set(CMAKE_EXE_LINKER_FLAGS "-static")
+    set(samesh_exe "sa_mesh_static")
+endif()
+if(MPI_GCC OR MPI_INTEL)
+    find_package(MPI REQUIRED)
+    set(CMAKE_Fortran_COMPILER mpif90)
+    set(CMAKE_C_COMPILER mpicc)
+    set(samesh_exe "mpi_sa_mesh")
 endif()
 
 # Set compilation flags
@@ -112,7 +116,6 @@ add_subdirectory(Modules/io_modules)
 add_subdirectory(Modules/mountain_module)
 add_subdirectory(LSS_Model/CLASS/3.6)
 
-set(DFLAG "-DRUNSVS")
 add_subdirectory(Modules/librmn/19.7.0)
 add_subdirectory(LSS_Model/SVS/svs1)
 add_subdirectory(Routing_Model/reservoir_update)
@@ -154,7 +157,7 @@ target_link_libraries(${samesh_exe} PUBLIC
 foreach(LIBRARY MPI_MODULE IO_MODULE SIM_STAT STRING_MODULE IRRIGATION MOUNTAIN 
     BLOWING_SNOW SA_MESH_ROUTINES_1 SA_MESH_ROUTINES_2 PERMAFROST 
     WATROUTE_OLD RESERVOIR_UPDATE RPN_WATROUTE BASEFLOW CLASS_LIBRARY SVS_LIBRARY)
-    target_include_directories(${LIBRARY} PUBLIC ${CMAKE_Fortran_MODULE_DIRECTORY})
+    target_include_directories(${LIBRARY} PRIVATE ${CMAKE_Fortran_MODULE_DIRECTORY})
     
     # set_fortran_compile_flags(${LIBRARY})
     set_target_properties(${LIBRARY} PROPERTIES 
@@ -163,8 +166,6 @@ foreach(LIBRARY MPI_MODULE IO_MODULE SIM_STAT STRING_MODULE IRRIGATION MOUNTAIN
 endforeach()
 
 target_compile_options(${samesh_exe} PRIVATE -c -g -fbacktrace)
-# NetCDF include directories
-
 
 # Include current binary directory for mod files
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/mod)

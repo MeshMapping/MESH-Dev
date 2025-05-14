@@ -1,5 +1,3 @@
-
-
 target_sources(SVS_LIBRARY PRIVATE
                 sfclayer_mod.F90
 
@@ -10,7 +8,5 @@ target_sources(SVS_LIBRARY PRIVATE
                 suncos1.F90 
                 interpveg.F90
 		compz0.F90 
-                difuvd2.F90
-
-                
+                difuvd2.F90 
         )

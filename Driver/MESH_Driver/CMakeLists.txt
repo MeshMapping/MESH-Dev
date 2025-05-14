@@ -1,3 +1,18 @@
+# =======================================================================================
+# CMake Configuration for MESH Driver (SA_MESH_ROUTINES_1 and SA_MESH_ROUTINES_2)
+# ---------------------------------------------------------------------------------------
+# This file organizes the MESH Driver source code into two separate static libraries:
+#
+# 1. SA_MESH_ROUTINES_1:
+#    - Contains core shared modules and global variable definitions used across the model.
+#    - Linked early to provide foundational structures for other targets.
+#
+# 2. SA_MESH_ROUTINES_2:
+#    - Includes input/output routines, file parsers, and the main MESH driver execution code.
+#    - Depends on most model components (e.g., IO_MODULE, WATROUTE, SVS_LIBRARY) to function.
+#
+# Both libraries export their module files and are set up with explicit dependencies and
+# target linkage to ensure proper build order and integration within the MESH system.
 
 set(SA_MESH_routines_1
     # core routines
@@ -70,13 +85,19 @@ set(SA_MESH_routines_2
 	MESH_driver.f90
 )
 
-
-
+###################################################################################
+# First part of MESH Driver code compilation stored in SA_MESH_ROUTINES_1 library 
 add_library(SA_MESH_ROUTINES_1 STATIC ${SA_MESH_routines_1})
-
-add_library(SA_MESH_ROUTINES_2 STATIC ${SA_MESH_routines_2})
-
 add_dependencies(SA_MESH_ROUTINES_1 MPI_MODULE IO_MODULE)
+
+# Attaching required libraries
+target_link_libraries(SA_MESH_ROUTINES_1 PRIVATE
+                        MPI_MODULE    
+                        IO_MODULE)
+
+##################################################################################
+# Second part of MESH Driver code compilation stored in SA_MESH_ROUTINES_2 library 
+add_library(SA_MESH_ROUTINES_2 STATIC ${SA_MESH_routines_2})
 add_dependencies(SA_MESH_ROUTINES_2 
                     SA_MESH_ROUTINES_1 
                     SIM_STAT
@@ -93,10 +114,7 @@ add_dependencies(SA_MESH_ROUTINES_2
                         
                     SVS_LIBRARY
                     LIBRMN)
-
-target_link_libraries(SA_MESH_ROUTINES_1 PUBLIC
-                        MPI_MODULE    
-                        IO_MODULE)
+                    
 target_link_libraries(SA_MESH_ROUTINES_2 PUBLIC
                         SIM_STAT
                         WATROUTE_OLD
@@ -108,7 +126,4 @@ target_link_libraries(SA_MESH_ROUTINES_2 PUBLIC
                         CLASS_LIBRARY
                         SVS_LIBRARY
                         MOUNTAIN
-                        IO_MODULE
-                        )
-
-set_fortran_compile_flags(SA_MESH_ROUTINES_2)
+                        IO_MODULE)
