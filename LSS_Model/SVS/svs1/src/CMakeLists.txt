@@ -5,4 +5,3 @@ target_sources(SVS_LIBRARY PRIVATE
 
                 runsvs_mesh.F90
         )
-

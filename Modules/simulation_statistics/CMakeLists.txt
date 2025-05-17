@@ -14,3 +14,4 @@ add_library(SIM_STAT
 )
 
 target_link_libraries(SIM_STAT PRIVATE SA_MESH_ROUTINES_1)
+

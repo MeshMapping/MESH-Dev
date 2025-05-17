@@ -12,13 +12,13 @@ add_library(IO_MODULE
             parse_utilities.f90 
             field_utilities.f90 
             date_utilities.f90
-			txt_io.f90 
+			      txt_io.f90 
             ensim_io.f90 
             nc_io.F90
             variable_maps.f90 
             mesh_io.F90
             input_forcing.f90
-			basin_utilities.f90
+			      basin_utilities.f90
         )
 
 target_link_libraries(IO_MODULE PRIVATE MPI_MODULE STRING_MODULE)

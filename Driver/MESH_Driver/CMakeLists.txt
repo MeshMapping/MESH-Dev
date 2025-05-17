@@ -39,7 +39,6 @@ set(SA_MESH_routines_1
 set(SA_MESH_routines_2 
     # Input routines
     read_initial_inputs.F90
-
     read_shed_r2c.f90 
     read_shed_nc.F90 
     read_shed_csv.f90 
@@ -85,7 +84,6 @@ set(SA_MESH_routines_2
 	MESH_driver.f90
 )
 
-###################################################################################
 # First part of MESH Driver code compilation stored in SA_MESH_ROUTINES_1 library 
 add_library(SA_MESH_ROUTINES_1 STATIC ${SA_MESH_routines_1})
 add_dependencies(SA_MESH_ROUTINES_1 MPI_MODULE IO_MODULE)
@@ -95,9 +93,6 @@ target_link_libraries(SA_MESH_ROUTINES_1 PRIVATE
                         MPI_MODULE    
                         IO_MODULE)
 
-##################################################################################
-# Second part of MESH Driver code compilation stored in SA_MESH_ROUTINES_2 library 
-add_library(SA_MESH_ROUTINES_2 STATIC ${SA_MESH_routines_2})
 add_dependencies(SA_MESH_ROUTINES_2 
                     SA_MESH_ROUTINES_1 
                     SIM_STAT
@@ -127,3 +122,4 @@ target_link_libraries(SA_MESH_ROUTINES_2 PRIVATE
                         SVS_LIBRARY
                         MOUNTAIN
                         IO_MODULE)
+

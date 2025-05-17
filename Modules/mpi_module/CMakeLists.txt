@@ -13,3 +13,4 @@ if(NOT MPI)
         mpi_stub.f90
     )
 endif()
+

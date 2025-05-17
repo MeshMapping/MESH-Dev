@@ -3,4 +3,3 @@ target_sources(RPN_WATROUTE PRIVATE
                 rerout.f
                 route.f
                 flowinit.f
-        )
