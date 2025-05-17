@@ -38,7 +38,7 @@ set(SA_MESH_routines_1
 
 set(SA_MESH_routines_2 
     # Input routines
-    read_initial_inputs.f90
+    read_initial_inputs.F90
 
     read_shed_r2c.f90 
     read_shed_nc.F90 
@@ -46,7 +46,7 @@ set(SA_MESH_routines_2
     read_soil_levels.f90 
     read_shed_nc_subbasin.F90
 
-    read_parameters.f90
+    read_parameters.F90
     read_parameters_class.f90 
     read_parameters_hydrology.f90 
     read_parameters_r2c.f90 
@@ -115,7 +115,7 @@ add_dependencies(SA_MESH_ROUTINES_2
                     SVS_LIBRARY
                     LIBRMN)
                     
-target_link_libraries(SA_MESH_ROUTINES_2 PUBLIC
+target_link_libraries(SA_MESH_ROUTINES_2 PRIVATE
                         SIM_STAT
                         WATROUTE_OLD
                         PERMAFROST

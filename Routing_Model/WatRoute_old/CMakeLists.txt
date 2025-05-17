@@ -6,5 +6,8 @@ add_library(WATROUTE_OLD
             WF_ROUTE.f
             WF_ROUTE_module.f90
         )
-target_link_libraries(WATROUTE_OLD PRIVATE SA_MESH_ROUTINES_1)
+target_link_libraries(WATROUTE_OLD PRIVATE 
+                        SA_MESH_ROUTINES_1
+                        RESERVOIR_UPDATE)
+                        
 target_compile_definitions(WATROUTE_OLD PUBLIC "RUNSVS")

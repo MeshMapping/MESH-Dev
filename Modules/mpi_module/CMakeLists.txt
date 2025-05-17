@@ -8,7 +8,7 @@ add_library(MPI_MODULE
             mpi_module.f90
         )
 
-if(NOT MPI_GCC AND NOT MPI_INTEL)
+if(NOT MPI)
     target_sources(MPI_MODULE PRIVATE
         mpi_stub.f90
     )
